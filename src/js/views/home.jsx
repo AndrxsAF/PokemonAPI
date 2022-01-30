@@ -64,7 +64,7 @@ export const Home = (props) => {
 	return (
 		<div className="mt-3">
 			<p className="ps-5 fs-1 m-0">Pokémon:</p>
-			<div className="m-0 d-flex overflow-auto">
+			<div className="m-0 d-flex overflow-auto p-2">
 				{pokemon.length > 0
 				? pokemon.map((poke, index) => (
 						<CardsPokemon key={index} pokes={poke.name} url={poke.url} />
@@ -79,7 +79,7 @@ export const Home = (props) => {
 				</ul>
 			</nav>
 			<p className="ps-5 fs-1 mt-3">Games:</p>
-			<div className="m-0 d-flex overflow-auto">
+			<div className="m-0 d-flex overflow-auto p-2">
 				{region.length > 0
 				? region.map((region, index) => (
 						<CardsRegion key={index} region={region.name} url={region.url} />

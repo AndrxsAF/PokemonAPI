@@ -39,7 +39,7 @@ const CardsPokemon = (props) => {
     }, [props.url])
 		
     return (
-        <div className="col-md-3 col-sm-12 p-4">
+        <div className="col-md-3 col-sm-12 px-2">
             <div className="card">
                 <img src={pokemonList.sprites ? pokemonList.sprites.other["official-artwork"].front_default : null} className="card-img-top img-fluid" alt={props.pokes}/>
                 <div className="card-body bg-light">

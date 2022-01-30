@@ -64,17 +64,17 @@ const CardsRegion = (props) => {
     }, [])
 		
     return (
-        <div className="col-md-3 col-sm-12 p-4">
-            <div className="card">
+        <div className="col-md-3 col-sm-12 px-2">
+            <div className="card h-100">
                 <img src={imgList[props.region.split("-").join("")]} className="card-img-top img-fluid" alt={props.region}/>
                 <div className="card-body bg-light">
                     <h5 className="card-title fs-3 text-center">Pokémon {props.region.split("-").map((strings) => capitalizeFirstLetter(strings)).join(" ")}</h5>
                     <p className="card-text mb-1"><strong>Gen:</strong> {genList.name}.</p>
                     {checkRegion()}
-                    <div className="container-fluid d-flex justify-content-end p-0">
+                </div>
+                <div className="card-body bg-light d-flex justify-content-end align-items-end">
                         <input type="checkbox" className="btn-check" name={props.region} id={`${props.region}-check`}/>
                         <label className="btn btn-outline-warning p-1" htmlFor={`${props.region}-check`}><img src="https://img.icons8.com/color/40/000000/star-pokemon.png"/></label>
-                    </div>
                 </div>
             </div>
         </div>
