@@ -5,30 +5,30 @@ import CardsPokemon from "../component/CardsPokemon.jsx";
 import CardsRegion from "../component/CardsRegion.jsx";
 import { getPokemon, getSpecificPokemon } from "../services/services.js";
 const regionUrl = "https://pokeapi.co/api/v2/version-group/"
+const mainUrl = "https://pokeapi.co/api/v2/pokemon/?limit=10&offset=0"
 
 export const Home = (props) => {
 	
-	const [urlState, setUrl] = useState("https://pokeapi.co/api/v2/pokemon/")
 	const [pokemon, setPokemon] = useState([]);
 	const [nextPage, setNextPage] = useState("");
 	const [previousPage, setPreviousPage] = useState(null);
-	const [pokedexNumbers, setPokedexNumbers] = useState([1, 20])
+	const [pokedexNumbers, setPokedexNumbers] = useState([1, 10])
 	const [region, setRegion] = useState([])
 	const [nextButton, setNextButton] = useState(false);
 	const [previousButton, setPreviousButton] = useState(false);
 
 	const buttonNextPage = () => {
 		setNextButton(true)
-		setPokedexNumbers(pokedexNumbers.map((numbers) => numbers + 20))
+		setPokedexNumbers(pokedexNumbers.map((numbers) => numbers + 10))
 		console.log(pokedexNumbers)
-		setUrl(nextPage)
+		pokemonGetFunct(nextPage);
 	}
 	
 	const buttonPreviousPage = () => {
 		setPreviousButton(true)
-		setPokedexNumbers(pokedexNumbers.map((numbers) => numbers - 20))
+		setPokedexNumbers(pokedexNumbers.map((numbers) => numbers - 10))
 		console.log(pokedexNumbers)
-		setUrl(previousPage)
+		pokemonGetFunct(previousPage);
 	}
 
 	const pokemonGetFunct = async (url) => {
@@ -56,10 +56,9 @@ export const Home = (props) => {
 	};
 		
 	useEffect(() => {
-		pokemonGetFunct(urlState);
-	}, [urlState]);
-
-	regionGetFunct(regionUrl)
+		pokemonGetFunct(mainUrl);
+		regionGetFunct(regionUrl)
+	}, []);
 
 	return (
 		<div className="mt-3">

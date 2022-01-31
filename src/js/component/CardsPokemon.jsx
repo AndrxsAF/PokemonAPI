@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
 import { getPokemon, getSpecificPokemon } from "../services/services.js";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { Context } from "../store/appContext"
 
 const CardsPokemon = (props) => {
 
+    const { store, actions } = useContext(Context)
     const [pokemonList, setPokemonList] = useState({});
 
     const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1)
@@ -49,6 +51,7 @@ const CardsPokemon = (props) => {
                     <p className="card-text"><strong>Weight:</strong> {pokemonList.weight} lbs.</p>
                     <div className="container-fluid d-flex justify-content-between p-0">
                         <a href="#" className="btn btn-primary d-flex justify-content-center align-items-center">Pokedex description</a>
+                        {/* onClick={actions.addPokeFav({name: props.pokes, img: pokemonList.sprites ? pokemonList.sprites.other["home"].front_default : null, dexEntry: pokemonList.id})} */}
                         <input type="checkbox" className="btn-check" name={props.pokes} id={`${props.pokes}-check`}/>
                         <label className="btn btn-outline-warning p-1" htmlFor={`${props.pokes}-check`}><img src="https://img.icons8.com/color/40/000000/star-pokemon.png"/></label>
                     </div>
