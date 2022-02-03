@@ -1,0 +1,9 @@
+.custom-favorite {
+    min-width: 10rem;
+    height: 10vh;
+}
+
+.custom-favorite-img {
+    width: 40px;
+    height: 40px;
+}

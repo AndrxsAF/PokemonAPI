@@ -8,8 +8,6 @@ const CardsPokemon = (props) => {
     const { store, actions } = useContext(Context)
     const [pokemonList, setPokemonList] = useState({});
 
-    const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1)
-
     const pokemonGetFunct = async (url) => {
 		try {
 			const res = await getPokemon(url);
@@ -24,11 +22,11 @@ const CardsPokemon = (props) => {
         if (pokemonList.types) {
             if (pokemonList.types.length > 1) {
                 return (
-                    <p className="card-text mb-1"><strong>Types:</strong> {capitalizeFirstLetter(pokemonList.types[0].type.name)} / {capitalizeFirstLetter(pokemonList.types[1].type.name)}.</p>
+                    <p className="card-text mb-1"><strong>Types:</strong> {actions.capitalizeFirstLetter(pokemonList.types[0].type.name)} / {actions.capitalizeFirstLetter(pokemonList.types[1].type.name)}.</p>
                 )
             } else {
                 return (
-                    <p className="card-text mb-1"><strong>Type:</strong> {capitalizeFirstLetter(pokemonList.types[0].type.name)}.</p>
+                    <p className="card-text mb-1"><strong>Type:</strong> {actions.capitalizeFirstLetter(pokemonList.types[0].type.name)}.</p>
                 )
             }
         } else {
@@ -36,23 +34,26 @@ const CardsPokemon = (props) => {
         }
     }
 
+    const checkFunc = () => {
+        actions.addPokeFav(props.pokes, {name: props.pokes, img: pokemonList.sprites ? pokemonList.sprites.other["home"].front_default : null, dexEntry: pokemonList.id, check: actions.checker(props.pokes)})
+    }
+
     useEffect(() => {
         pokemonGetFunct(props.url)
     }, [props.url])
-		
+
     return (
-        <div className="col-md-3 col-sm-12 px-2">
+        <div className="col-lg-3 col-md-4 col-sm-12 p-2">
             <div className="card">
                 <img src={pokemonList.sprites ? pokemonList.sprites.other["official-artwork"].front_default : null} className="card-img-top img-fluid" alt={props.pokes}/>
                 <div className="card-body bg-light">
-                    <h5 className="card-title fs-3 text-center">{capitalizeFirstLetter(props.pokes)}</h5>
+                    <h5 className="card-title fs-3 text-center">{actions.capitalizeFirstLetter(props.pokes)}</h5>
                      {checkType()}
                     <p className="card-text mb-1"><strong>Height:</strong> {pokemonList.height} inches tall.</p>
                     <p className="card-text"><strong>Weight:</strong> {pokemonList.weight} lbs.</p>
                     <div className="container-fluid d-flex justify-content-between p-0">
-                        <a href="#" className="btn btn-primary d-flex justify-content-center align-items-center">Pokedex description</a>
-                        {/* onClick={actions.addPokeFav({name: props.pokes, img: pokemonList.sprites ? pokemonList.sprites.other["home"].front_default : null, dexEntry: pokemonList.id})} */}
-                        <input type="checkbox" className="btn-check" name={props.pokes} id={`${props.pokes}-check`}/>
+                        <button className="btn btn-primary d-flex justify-content-center align-items-center">Pokedex description</button>
+                        <input checked={store.favorite[props.pokes]} onChange={() => checkFunc()} type="checkbox" className="btn-check" name={props.pokes} id={`${props.pokes}-check`}/>
                         <label className="btn btn-outline-warning p-1" htmlFor={`${props.pokes}-check`}><img src="https://img.icons8.com/color/40/000000/star-pokemon.png"/></label>
                     </div>
                 </div>

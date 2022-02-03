@@ -5,6 +5,7 @@ import ScrollToTop from "./component/scrollToTop.jsx";
 import { Home } from "./views/home.jsx";
 import { Demo } from "./views/demo.jsx";
 import { Single } from "./views/single.jsx";
+import Pokemon from "./views/pokemon.jsx"
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar.jsx";
@@ -25,7 +26,9 @@ const Layout = () => {
 						<Route exact path="/">
 							<Home />
 						</Route>
-					
+						<Route exact path="/pokemon/:id">
+							<Pokemon />
+						</Route>
 						<Route>
 							<h1>Not found!</h1>
 						</Route>
