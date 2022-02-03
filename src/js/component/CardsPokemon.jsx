@@ -35,7 +35,7 @@ const CardsPokemon = (props) => {
     }
 
     const checkFunc = () => {
-        actions.addPokeFav(props.pokes, {name: props.pokes, img: pokemonList.sprites ? pokemonList.sprites.other["home"].front_default : null, dexEntry: pokemonList.id, check: actions.checker(props.pokes)})
+        actions.addPokeFav(props.pokes, {name: props.pokes, img: pokemonList.sprites ? pokemonList.sprites.front_default : null, dexEntry: pokemonList.id, check: actions.checker(props.pokes)})
     }
 
     useEffect(() => {

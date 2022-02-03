@@ -21,12 +21,12 @@ export const Navbar = () => {
 						Favorites
 					</button>
 					<ul style={{left: "auto", top: "100%"}} className={"bg-light dropdown-menu " + addClass}>
-						<li><a className="dropdown-item" href="#">Pokémon:</a></li>
+						<li className="px-3">Pokémon:</li>
 						<li><hr className="dropdown-divider"/></li>
-						{store.pokedex ? store.pokedex.map((item, index) => (<li className="custom-favorite dropdown-item d-flex align-items-center justify-content-between p-2" key={item + index}><img className="img-fluid custom-favorite-img" src={store.favorite[item].img} alt={item} /><p className="py-0 px-2 m-0" href="#">{actions.capitalizeFirstLetter(item)} - [{store.favorite[item].dexEntry}]</p><button onClick={() => actions.deleterList(item)} type="button" className="ps-2 btn-close" data-bs-dismiss="alert" aria-label="Close"></button></li>)) : null}
+						{store.pokedex ? store.pokedex.map((item, index) => (<li className="custom-favorite dropdown-item d-flex align-items-center justify-content-between py-0 px-2" key={item + index}><img className="img-fluid custom-favorite-img" src={store.favorite[item].img} alt={item} /><p className="py-0 px-2 m-0" href="#">{actions.capitalizeFirstLetter(item)} - [{store.favorite[item].dexEntry}]</p><button onClick={() => actions.deleterList(item)} type="button" className="ps-2 btn-close" data-bs-dismiss="alert" aria-label="Close"></button></li>)) : null}
 						<li><hr className="dropdown-divider"/></li>
-						<li><a className="dropdown-item" href="#">Games:</a></li>
-						{store.regions ? store.regions.map((item, index) => (<li className="custom-favorite dropdown-item d-flex align-items-center justify-content-between p-2" key={item + index}><img className="img-fluid custom-favorite-img" src={store.favRegion[item].img} alt={item} /><p className="py-0 px-2 m-0" href="#">{actions.capitalizeFirstLetter(item)} - [{store.favRegion[item].gen}]</p><button onClick={() => actions.deleterListRegion(item)} type="button" className="ps-2 btn-close" data-bs-dismiss="alert" aria-label="Close"></button></li>)) : null}
+						<li className="px-3">Games:</li>
+						{store.regions ? store.regions.map((item, index) => (<li className="custom-favorite dropdown-item d-flex align-items-center justify-content-between py-0 px-2" key={item + index}><img className="img-fluid custom-favorite-img" src={store.favRegion[item].img} alt={item} /><p className="py-0 px-2 m-0" href="#">{actions.capitalizeFirstLetter(item)} - [{store.favRegion[item].gen}]</p><button onClick={() => actions.deleterListRegion(item)} type="button" className="ps-2 btn-close" data-bs-dismiss="alert" aria-label="Close"></button></li>)) : null}
 						<li><hr className="dropdown-divider"/></li>
 				</ul>
 			</div>
