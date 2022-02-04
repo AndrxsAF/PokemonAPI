@@ -28,7 +28,7 @@ const CardsRegion = (props) => {
     }, [])
 		
     return (
-        <div className="col-lg-3 col-md-4 col-sm-12 px-2">
+        <div className="col-lg-3 col-md-4 col-sm-12 px-2 d-flex justify-content-center">
             {loading ? (<Spinner/>) 
             : (<div className="card h-100">
                 <img src={store.imgList[props.region.split("-").join("")]} className="card-img-top img-fluid" alt={props.region}/>

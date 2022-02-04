@@ -2,20 +2,26 @@ import PropTypes from "prop-types";
 import { getPokemon, getSpecificPokemon } from "../services/services.js";
 import React, { useEffect, useState, useContext } from "react";
 import { Context } from "../store/appContext"
+import { Link, useParams } from "react-router-dom";
+import Spinner from "./spinner.jsx"
 
 const CardsPokemon = (props) => {
 
     const { store, actions } = useContext(Context)
     const [pokemonList, setPokemonList] = useState({});
+    const [loading, setLoading] = useState(true);
 
     const pokemonGetFunct = async (url) => {
 		try {
+            setLoading(true)
 			const res = await getPokemon(url);
 			const dataJSON = await res.json();
 			setPokemonList(dataJSON)
 		} catch (err) {
 			console.log(err);
-		}
+		} finally {
+            setLoading(false)
+        }
 	};
 
     const checkType = () => {
@@ -43,8 +49,9 @@ const CardsPokemon = (props) => {
     }, [props.url])
 
     return (
-        <div className="col-lg-3 col-md-4 col-sm-12 p-2">
-            <div className="card">
+        <div className="col-lg-3 col-md-4 col-sm-12 p-2 d-flex justify-content-center">
+            {loading ? (<Spinner/>) 
+            : (<div className="card">
                 <img src={pokemonList.sprites ? pokemonList.sprites.other["official-artwork"].front_default : null} className="card-img-top img-fluid" alt={props.pokes}/>
                 <div className="card-body bg-light">
                     <h5 className="card-title fs-3 text-center">{actions.capitalizeFirstLetter(props.pokes)}</h5>
@@ -52,12 +59,14 @@ const CardsPokemon = (props) => {
                     <p className="card-text mb-1"><strong>Height:</strong> {pokemonList.height} inches tall.</p>
                     <p className="card-text"><strong>Weight:</strong> {pokemonList.weight} lbs.</p>
                     <div className="container-fluid d-flex justify-content-between p-0">
-                        <button className="btn btn-primary d-flex justify-content-center align-items-center">Pokedex description</button>
+                        <Link to={props.pokes}>
+                            <button className="btn btn-primary d-flex justify-content-center align-items-center">Pokedex description</button>
+                        </Link>
                         <input checked={store.favorite[props.pokes]} onChange={() => checkFunc()} type="checkbox" className="btn-check" name={props.pokes} id={`${props.pokes}-check`}/>
                         <label className="btn btn-outline-warning p-1" htmlFor={`${props.pokes}-check`}><img src="https://img.icons8.com/color/40/000000/star-pokemon.png"/></label>
                     </div>
                 </div>
-            </div>
+            </div> )}
         </div>
         
     )
